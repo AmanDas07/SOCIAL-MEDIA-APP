@@ -25,6 +25,7 @@ const Dashboard = () => {
     const [image, setImage] = useState({});
     const [people, setPeople] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [update, setupdate] = useState();
 
 
 
@@ -66,6 +67,7 @@ const Dashboard = () => {
                 }
             })
             setPeople(data);
+             setupdate(true);
         } catch (error) {
             console.log(error);
         }
@@ -77,7 +79,7 @@ const Dashboard = () => {
             fetchUserPosts();
             findPeople();
         }
-    }, [state && state.token])
+    }, [state && state.token, update])
 
     const fetchUserPosts = async () => {
         try {
@@ -187,7 +189,7 @@ const Dashboard = () => {
                 </div>
                 <div className="col-md-4">
                     <div>{/**/}</div>
-                    <PeopleComp people={people} />
+                    <PeopleComp people={people} setupdate={setupdate}/>
                 </div>
             </div>
         </UserRoute>
