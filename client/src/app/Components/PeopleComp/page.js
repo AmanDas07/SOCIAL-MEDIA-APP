@@ -5,7 +5,7 @@ import { userContext } from "../../../../context/page"
 import { useRouter } from "next/navigation"
 import moment from "moment"
 import axios from "axios"
-const PeopleComp = ({ people }) => {
+const PeopleComp = ({ people, setupdate  }) => {
     const [state] = useContext(userContext);
     const defaultImage = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw1VAlzb3zoESTowdKT3QY8z&ust=1709845524255000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJCe1o3F4IQDFQAAAAAdAAAAABAD";
     const router = useRouter();
@@ -16,7 +16,10 @@ const PeopleComp = ({ people }) => {
                     Authorization: `Bearer ${state.token}`,
                 }
             });
-            if (data) { router.push("/Dashboard") };
+            if (data) {
+                setupdate(false);
+                router.push("/Dashboard")
+            };
 
         } catch (error) {
             console.log(error);
